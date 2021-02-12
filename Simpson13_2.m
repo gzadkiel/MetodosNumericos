@@ -14,12 +14,12 @@ n = input('Intervalos: ');
 h = (b-a)/n; 
 
 for i=1:length(X)
-  if a == X(i) 
+  if abs(a-X(i)) < 0.0001 
     indA = i;
     end
   end
 for i=1:length(X)
-  if b == X(i)
+  if abs(b-X(i)) < 0.0001
     indB = i;
     end
   end 

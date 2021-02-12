@@ -15,15 +15,15 @@ X = a:h:b;
 Y = arrayfun(F,X);
 
 for i=1:length(X)
-  if a == X(i)
-    indA = i; 
+  if abs(a-X(i)) < 0.0001 
+    indA = i;
   end
 end
 for i=1:length(X)
-  if b == X(i)
+  if abs(b-X(i)) < 0.0001
     indB = i;
   end
-end
+end 
 
 sum1 = 0;
 sum2 = 0;
