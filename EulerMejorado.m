@@ -1,26 +1,47 @@
-#Heun
+% Inputs:
+% F: Function handle @(y,t) for F(y,t) in y' = F(y,t)
+% h: Step size
+% t0: Initial value for the independent variable t
+% y0: Initial value for the dependent variable y(t0)
+% tf: Value to approximate y(tf)
+%
+% Outputs:
+% tv: Vector of t values used to approximate the solution
+% yv: Vector of y values obtained from the approximation
+%
+% Example:
+% Define the function F(y,t) in y' = F(y,t)
+% F = @(y,t) -2*y + 4*sin(t);
+%
+% Define the initial conditions
+% t0 = 0;
+% y0 = 0;
+%
+% Define the step size and the value to approximate
+% h = 0.1;
+% tf = 5;
+%
+% Call the function to obtain the approximation
+% [tv, yv] = improved_euler(F, h, t0, y0, tf);
 
-clear all; clc; close all; 
-h = input('Número de paso: '); 
-t0 = input('t inicial: '); 
-y0 = input('y inicial: '); 
-tf = input('Valor a especializar: '); 
-F = @(y,t) (); 
-tv = t0:h:tf
+function [tv, yv] = EulerMejorado(F, h, t0, y0, tf)
+
+% Initialize time and y vectors
+tv = t0:h:tf;
 yv(1) = y0; 
 
 for i=1:length(tv)-1  
+  % Compute slopes at current point and at point predicted by forward Euler method
   tr1 = F(yv(i),tv(i));
   tr2 = F(yv(i)+h*(F(yv(i),tv(i))),tv(i+1));  
+  % Compute next y value using Improved Euler method
   yv(i+1) = yv(i) + (h/2)*(tr1+tr2);
 end
 
-disp('Valores de t: ')
-disp(tv)
-disp('Valores de y: ')
-disp(yv) 
+% Plot the results
+plot(tv, yv, '-o')
+xlabel('t')
+ylabel('y')
+title('Aproximación con Euler Mejorado')
 
-#yv(1) = [];
-#plot(tv,yv,'-o')
-#grid(gca,'minor')
-#grid on 
+end
