@@ -17,7 +17,7 @@
 % toly = 1e-6;
 % [x, niter, ex, ey] = bisection(f, a, b, tolx, toly);
 
-function [x, niter, ex, ey] = biseccion(F, a, b, tolx, toly)
+function [x, niter, ex, ey] = Biseccion(F, a, b, tolx, toly)
 
     % Initialize variables for loop
     xant    = 0;
