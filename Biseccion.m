@@ -15,7 +15,7 @@
 % b = 3;
 % tolx = 1e-6;
 % toly = 1e-6;
-% [x, niter, ex, ey] = bisection(f, a, b, tolx, toly);
+% [x, niter, ex, ey] = Biseccion(f, a, b, tolx, toly);
 
 function [x, niter, ex, ey] = Biseccion(F, a, b, tolx, toly)
 
