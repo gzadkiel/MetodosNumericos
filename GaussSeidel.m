@@ -22,10 +22,10 @@
 % n = 100;
 % use_tolerance = true;
 % tol = 1e-8;
-% [sol, residuo, iters] = gauss_seidel(A, b, n, use_tolerance, tol);
+% [sol, residuo, iters] = GaussSeidel(A, b, n, use_tolerance, tol);
 
 
-function [sol, residuo, iters] = gauss_seidel(A, b, n, use_tolerance, tol)
+function [sol, residuo, iters] = GaussSeidel(A, b, n, use_tolerance, tol)
     
   % Extract diagonal, lower and upper triangular matrices
   D = diag(diag(A));
