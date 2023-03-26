@@ -18,7 +18,7 @@
 % Y = [1 4 9 16];
 % polynomial_lagrange(X, Y);
 
-function [polynomial, rounded_polynomial] = polynomial_lagrange(X, Y, compare_rounded_polynomial)
+function [polynomial, rounded_polynomial] = LagrangePolinomio(X, Y, compare_rounded_polynomial)
 
   syms x; 
   pol_grange = 0;
