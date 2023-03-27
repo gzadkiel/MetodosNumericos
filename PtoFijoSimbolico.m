@@ -1,5 +1,5 @@
 % Fixed-point algorithm for finding the root of a function
-%
+% 
 % Inputs:
 %  - f: Symbolic function to find the root of
 %  - a: Lower bound of the interval
