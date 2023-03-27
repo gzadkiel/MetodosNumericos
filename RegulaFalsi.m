@@ -1,32 +1,54 @@
-f = input('funcion: ','s'); 
-F = inline(f); 
-a = input('lim. inferior del int: '); 
-b = input('lim. superior del int: '); 
-tolx = input('tol. en x: '); 
-toly = input('tol. en y: '); 
-x0 = 0;
-ey = ex = 999; 
-i = 0; 
-if F(a)*F(b) < 0 
-  while (ex > tolx) && (ey > toly)
-    i = i+1; 
-    xant = x0; 
-    ya = F(a); 
-    yb = F(b); 
-    xsol = (a*yb-b*ya)/(yb-ya);
-    ex = abs(xsol-xant); 
-    ey = abs(F(xsol)); 
-    if F(xsol)*ya < 0
-      b = xsol; 
-    else
-      a = xsol; 
-    end
+% Finds a root of a function using the Regula Falsi method.
+%
+% Inputs: 
+%  - f: Function to evaluate
+%  - a: Lower endpoint of the interval
+%  - b: Upper endpoint of the interval
+%  - tolx: Tolerance for x error
+%  - toly: Tolerance for y error
+%
+% Ouputs: 
+%  - root: Calculated root
+%  - iter: Numer of iterations
+%  - err_x: Error in x
+%  - err_y: Error in y
+%
+% Example usage:
+% [root, iter, err_x, err_y] = RegulaFalsi(@(x) x^3-x-1, 1, 2, 1e-6, 1e-6);
+
+function [root, iter, err_x, err_y] = RegulaFalsi(F, a, b, tolx, toly)
+  
+  % Initialize the iteration counter and errors
+  iter = 0;
+  err_x = 999;
+  err_y = 999;
+  
+  % Check if the interval [a,b] satisfies Bolzano's theorem
+  if F(a)*F(b) < 0 
+      while (err_x > tolx) && (err_y > toly)
+          iter = iter + 1;              % Increase the iteration counter
+          xant = x0;                    % Save the previous approximation
+          ya = F(a);
+          yb = F(b);
+          xsol = (a*yb-b*ya)/(yb-ya);
+          err_x = abs(xsol - xant);     % Calculate the error in x
+          err_y = abs(F(xsol));         % Calculate the error in y
+          % Update the interval
+          if F(xsol)*ya < 0
+              b = xsol;
+          else
+              a = xsol;
+          end
+      end
+      root = xant;    % Save the final approximation
+  else
+      root = NaN;     % Return NaN if Bolzano's theorem is not satisfied
   end
-else
-  res = ['no se cumple bolzano en [',num2srt(a),',',num2str(b),']'];
-  disp(res) 
-end 
-res1 = ['la raiz es: ',num2str(xant)]; disp(res1) 
-res2 = ['cant. de interaciones: ',num2str(i)]; disp(res2) 
-res3 = ['error en x: ',num2str(ex)]; disp(res3) 
-res4 = ['error en y: ',num2str(ey)]; disp(res4)
+  
+  % Display the results
+  disp(['La raiz es: ',num2str(root)]);
+  disp(['Cant. de iteraciones: ',num2str(iter)]);
+  disp(['Error en x: ',num2str(err_x)]);
+  disp(['Error en y: ',num2str(err_y)]);
+
+end  
